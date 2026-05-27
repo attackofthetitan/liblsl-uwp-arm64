@@ -64,7 +64,7 @@ void lsl::ensure_lsl_initialized() {
 #endif
 		LOG_F(INFO, "%s", lsl_library_info());
 
-#ifdef _WIN32
+#if defined(_WIN32) && (!defined(WINAPI_FAMILY) || WINAPI_FAMILY != WINAPI_FAMILY_APP)
 		// if a timer resolution other than 0 is requested (0 means don't override)...
 		if (int desired_timer_resolution = lsl::api_config::get_instance()->timer_resolution()) {
 			// then override it for the lifetime of this program

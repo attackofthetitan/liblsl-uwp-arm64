@@ -336,9 +336,11 @@ install(FILES
 
 include(cmake/LSLCMake.cmake)
 
-add_executable(lslver testing/lslver.c)
-target_link_libraries(lslver PRIVATE lsl)
-installLSLApp(lslver)
+if(NOT WINDOWS_STORE)
+	add_executable(lslver testing/lslver.c)
+	target_link_libraries(lslver PRIVATE lsl)
+	installLSLApp(lslver)
+endif()
 
 if(NOT WIN32 AND LSL_TOOLS)
 	add_executable(blackhole testing/blackhole.cpp)
